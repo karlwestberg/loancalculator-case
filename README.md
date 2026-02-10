@@ -1,6 +1,11 @@
 # Loan calculator case
 
-React app build /w
+# Loan Calculator – Frontend Case
+
+React loan calculator app as part of frontend case assignment.
+Built with a focus on code structure, form handling and API integration, rather than visual polish and feature perfection.
+
+## Tech stack
 
 - [vite](https://vite.dev/)
 Builds fast with easy config, creating a great dev experience. Has good plugin and library support (including 'vitest')
@@ -26,9 +31,10 @@ npm install
 
 2. Build app
 ```
+> Note: `npm run build` must be run at least once before starting the dev server,
+as it generates API types (via `openapi-typescript`) and icon components.
 npm run build
 ```
-It's important to run this (at least once) before starting the local dev server. This script generates api types (using ```openapi-typescript```) and icon components.
 
 3. Run dev server
 ```
