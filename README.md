@@ -48,7 +48,7 @@ src/
   ...
 - hooks/                   # React hooks.
   - useApiQuery.ts         # Handles react-query GET requests with the API.
-  - useCalculateLoan.tsx   # Handles calculate loan POST request.
+  - useCalculateLoan.ts   # Handles calculate loan POST request.
 - utils/                   # Helper functions
 - config/
   - env.ts               # Handles env variables
@@ -62,12 +62,14 @@ src/
 
 ## Approach and choices
 
-Probably the first consideration was what type of react app I should build this as. Should I use a framework and what package manager should I use? The choice I ultimately made was to build the app as a static ```vite``` app using ```npm```. ```vite``` was used for it's build speed and generally good dev experience, with minial config and good library support. ```npm``` was to remove fuzz and there were no good reasons to use ```yarn``` or ```bun``` for example.
+Probably the first consideration was what type of react app I should build this as. Should I use a framework and what package manager should I use? The choice I ultimately made was to build the app as a static ```vite``` app using ```npm```. ```vite``` was used for it's build speed and generally good dev experience, with minial config and good library support. ```npm``` was to remove fuzz and there were no good reasons to use ```yarn``` or ```bun``` for example. Additionally I choose to use ```tailwindcss``` because of how much it speeds up styling and how easy it is to setup, without loosing any serious css features.
 
 The main technical priority from the get go was to create a form that handles form validation safely with some type safety. This is where ```react-hook-form``` comes in since it solves most of these issues out of the box.
 
-Another choice was how to handle data fetching. To ensure a simple approach that would handle states and errors well with minimal overhead, I opted for ```@tanstack/react-query```. This works especially well with the generated types form the api (using ```openapi-typescript```), and were easy to implement.
+Another choice was how to handle data fetching. To ensure a simple approach that would handle states and errors well with minimal overhead, I opted for ```@tanstack/react-query```. This works especially well with the generated types form the api (using ```openapi-typescript```), and were easy to implement into custom hooks (```useApiQuery.ts```, ```useCalculateLoan.ts```).
 
-
-
+For testing I opted for ```vitest``` for how well it implements with ```vite``` and how it works well with ```@testing-library```. Specifically I wrote two tests:
+1. ```LoanTerms.test.tsx```: Tests if the LoanTerms component renders the correct states depending on it's provided props
+2. ```LoanCalculator.test.tsx```: Tests that the loan calculator renders the form correctly (and it's loading and error states) + that it submits data correctly depending on user input.
+I prioritized these test because of how they ensure that visual feedback (LoanTerms) are rendered according to spec, as well as making sure the form renders, accepts data and submits correctly.
 
