@@ -38,6 +38,8 @@ npm run dev
 4. Open http://localhost:5173 in your browser
 
 ## Project structure
+
+```md
 src/
 - components/ # React components. Includes ```LoanCalculator.tsx`` which acts as a master component for the loan calculator form
 - hooks/ # React hooks. Includes ```useApiQuery.ts``` (used for react-query GET requests) and ```useCalculateLoan.tsx``` (handles calculate loan POST request)
@@ -46,7 +48,7 @@ src/
 - tests/components # Tests for react components
 - types/ # Reusable type declarations, contains the generated openapi types from the API (```https://loancalculator-ivory.vercel.app/api/openapi.yaml```).
 - assets/icons # All icons used as svg files.
-
+```
 
 
 
