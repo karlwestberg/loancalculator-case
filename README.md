@@ -21,6 +21,9 @@ Provides form state management and validation with great typescript support.
 Integrates well with Vite and allows testing react components using common testing-libraries.
 
 ## Run locally
+
+To run this app, [Node.js](https://nodejs.org/en) version **20 or later** is required.
+
 1. Install dependencies
 ```
 npm install
