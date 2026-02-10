@@ -6,20 +6,20 @@ React app build /w
 Builds fast with easy config, creating a great dev experience. Has good plugin and library support (including 'vitest')
 The app was initially created using `npm create vite` for fast setup with minimal config.
 
-- tailwindcss
+- [tailwindcss](https://tailwindcss.com/):
 Gives access to more or less everything css, without the need for css files. Speeds up styling and easy to setup with vite.
 
-- @tanstack/react-query
+- [@tanstack/react-query](https://www.npmjs.com/package/@tanstack/react-query):
 Simplifies fetching and state management. Removes the need to write complicated custom fetching hooks with error handling and state management.
 
-- react-hook-form
+- [react-hook-form](https://www.npmjs.com/package/react-hook-form):
 Removes the need to manage form state and makes form validation easy.
 
-- vitest (+ @testing-library)
-Implements well with vite, making it easy to test react components using '@testing-library/react'
+- [vitest](https://www.npmjs.com/package/vitest) (+ @testing-library):
+Implements well with vite, making it easy to write tests for react components using '@testing-library/react'
 
-## How to run
-1. Install dependenices
+## Run locally
+1. Install dependencies
 ```
 npm install
 ```
@@ -28,16 +28,27 @@ npm install
 ```
 npm run build
 ```
-It's important to run this before starting the local dev server. This script generates some necessary types and icon components.
+It's important to run this (at least once) before starting the local dev server. This script generates api types (using ```openapi-typescript```) and icon components.
 
 3. Run dev server
 ```
 npm run dev
 ```
 
-## Process & priorities
+4. Open http://localhost:5173 in your browser
 
-A top priority was to
+## Project structure
+src/
+- components/ # React components. Includes ```LoanCalculator.tsx`` which acts as a master component for the loan calculator form
+- hooks/ # React hooks. Includes ```useApiQuery.ts``` (used for react-query GET requests) and ```useCalculateLoan.tsx``` (handles calculate loan POST request)
+- utils/ # Helper functions
+- config/env # Handles env variables
+- tests/components # Tests for react components
+- types/ # Reusable type declarations, contains the generated openapi types from the API (```https://loancalculator-ivory.vercel.app/api/openapi.yaml```).
+- assets/icons # All icons used as svg files.
+
+
+
 
 # React + TypeScript + Vite
 
