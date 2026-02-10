@@ -3,22 +3,41 @@
 React app build /w
 
 - vite
--- Builds fast with easy config, creating a great dev experience. Has good plugin and library support (including 'vitest')
--- The app was initially created using `npm create vite` to reduce time spent on product setup.
+Builds fast with easy config, creating a great dev experience. Has good plugin and library support (including 'vitest')
+The app was initially created using `npm create vite` for fast setup with minimal config.
 
 - tailwindcss
--- Gives access to more or less everything css, without the need for css files. Speeds up styling and easy to setup with vite.
+Gives access to more or less everything css, without the need for css files. Speeds up styling and easy to setup with vite.
 
 - @tanstack/react-query
--- Simplifies fetching and state management. Removes the need to write complicated custom fetching hooks with error handling and state management.
+Simplifies fetching and state management. Removes the need to write complicated custom fetching hooks with error handling and state management.
 
 - react-hook-form
--- Removes the need to manage form state and makes form validation easy.
+Removes the need to manage form state and makes form validation easy.
 
 - vitest (+ @testing-library)
--- Implements well with vite, making it easy to test react components using '@testing-library/react' 
+Implements well with vite, making it easy to test react components using '@testing-library/react'
 
+## How to run
+1. Install dependenices
+```
+npm install
+```
 
+2. Build app
+```
+npm run build
+```
+It's important to run this before starting the local dev server. This script generates some necessary types and icon components.
+
+3. Run dev server
+```
+npm run dev
+```
+
+## Process & priorities
+
+A top priority was to
 
 # React + TypeScript + Vite
 

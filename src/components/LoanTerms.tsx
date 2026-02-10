@@ -52,9 +52,7 @@ export default function LoanTerms(props:LoanTermsProps) {
                             { infoItem('Total repayment amount', props.result?.loanDetails?.totalPayment, 'kr')}
                         </>
                     ) : (
-                        <>
-                            <div>Max loan amount: <strong>{props.result?.approval?.maxLoanAmount} kr</strong></div>
-                        </>
+                        <div>Max loan amount: <strong>{props.result?.approval?.maxLoanAmount} kr</strong></div>
                     )
                 }
             </div>
