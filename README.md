@@ -1,27 +1,24 @@
-# Loan calculator case
-
 # Loan Calculator – Frontend Case
 
-React loan calculator app as part of frontend case assignment.
-Built with a focus on code structure, form handling and API integration, rather than visual polish and feature perfection.
+React loan calculator app built as part of a frontend case assignment.
+The focus is on code structure, form handling, and API integration rather than visual polish or feature completeness.
 
 ## Tech stack
 
 - [vite](https://vite.dev/)
-Builds fast with easy config, creating a great dev experience. Has good plugin and library support (including 'vitest')
-The app was initially created using `npm create vite` for fast setup with minimal config.
+Fast build times and minimal config, resulting in a great dev experience. The project was bootstrapped using `npm create vite`.
 
 - [tailwindcss](https://tailwindcss.com/):
-Gives access to more or less everything css, without the need for css files. Speeds up styling and easy to setup with vite.
+Enables fast styling without managing separate CSS files, while maintaining control and access to pretty much everything css.
 
 - [@tanstack/react-query](https://www.npmjs.com/package/@tanstack/react-query):
-Simplifies fetching and state management. Removes the need to write complicated custom fetching hooks with error handling and state management.
+Simplifies data fetching, caching, and request state management, removing the need for custom logic and manual error handling.
 
 - [react-hook-form](https://www.npmjs.com/package/react-hook-form):
-Removes the need to manage form state and makes form validation easy.
+Provides form state management and validation with great typescript support.
 
 - [vitest](https://www.npmjs.com/package/vitest) (+ @testing-library):
-Implements well with vite, making it easy to write tests for react components using '@testing-library/react'
+Integrates well with Vite and allows testing react components using common testing-libraries.
 
 ## Run locally
 1. Install dependencies
@@ -68,37 +65,39 @@ src/
 
 ## Approach and choices
 
-Probably the first consideration was what type of react app I should build this as. Should I use a framework and what package manager should I use? The choice I ultimately made was to build the app as a static ```vite``` app using ```npm```. ```vite``` was used for it's build speed and generally good dev experience, with minial config and good library support. ```npm``` was to remove fuzz and there were no good reasons to use ```yarn``` or ```bun``` for example. Additionally I choose to use ```tailwindcss``` because of how much it speeds up styling and how easy it is to setup, without loosing any serious css features.
+I chose to build the application as a static vite react app using npm. This helped me get started fast with minimal configuration, good library support, and without introducing unnecessary complexity.
 
-The main technical priority from the get go was to create a form that handles form validation safely with some type safety. This is where ```react-hook-form``` comes in since it solves most of these issues out of the box.
+The main technical priority from the outset was to create a form that handles form validation safely with some type safety. This is where ```react-hook-form``` comes in since it solves most of these issues out of the box.
 
-Another choice was how to handle data fetching. To ensure a simple approach that would handle states and errors well with minimal overhead, I opted for ```@tanstack/react-query```. This works especially well with the generated types form the api (using ```openapi-typescript```), and were easy to implement into custom hooks (```useApiQuery.ts```, ```useCalculateLoan.ts```).
+Another choice was how to handle data fetching. To ensure a simple approach that would handle states and errors well with minimal overhead, I opted for ```@tanstack/react-query```. This works especially well with the generated types form the api (using ```openapi-typescript```), and were straightforward to integrate into custom hooks (```useApiQuery.ts```, ```useCalculateLoan.ts```).
 
 For testing I opted for ```vitest``` for how well it implements with ```vite``` and how it works well with ```@testing-library```. Specifically I wrote two tests:
-1. ```LoanTerms.test.tsx```: Tests if the LoanTerms component renders the correct states depending on it's provided props
+1. ```LoanTerms.test.tsx```: Tests if the LoanTerms component renders the correct states depending on its provided props
 2. ```LoanCalculator.test.tsx```: Tests that the loan calculator renders the form correctly (and it's loading and error states) + that it submits data correctly depending on user input.
-I prioritized these test because of how they ensure that visual feedback (LoanTerms) are rendered according to spec, as well as making sure the form renders, accepts data and submits correctly.
+I prioritized these test because of how they ensure that visual feedback (LoanTerms) are rendered according to spec, as well as making sure the form renders, accepts data and submits correctly. Given the time constraints, I focused on tests that validate core user behavior and visual feedback rather over full coverage.
 
 ### Downprioritized items
 
-I did not spend much time looking at styling. Basically my approach was simply to eyeball the look of the app based on the spec while relying heavily on the default styling generated by ```npm create vite```. Tailwind made it easy to for example "add padding when it looks like there is supposed to be padding". However I tried to make sure there was at least a sense of 'staying true' to the ui design.
-You may note that I added an icon (chevron-down.svg) that is generated into a react component using ```svgr``` and ```svgo```. Although I initially decided this would be overkill, I eventually choose to add it regardless in order to make the ```Select.tsx``` component look correctly. The reason for this is because I already had all of the code available (including the svg) on my machine and it took me roughly 2 minutes to implement. It was essentially just a copy + paste.
+I chose not to prioritize styling. My approach was to eyeball the look of the app based on the spec while relying heavily on the default styling generated by ```npm create vite```. Tailwind made it easy to for example "add padding when it looks like there is supposed to be padding". However I tried to make sure there was at least a sense of 'staying true' to the ui design.
+You may note that I added an icon (chevron-down.svg) that is generated into a react component using ```svgr``` and ```svgo```. Although I initially decided this would be overkill, I eventually chose to add it regardless in order to make the ```Select.tsx``` component look correctly. The reason for this is because I already had all of the code available (including the svg) on my machine and it took me roughly 2 minutes to implement. It was essentially just a copy + paste.
 
-I more or less spent no time creating a visually appealing loading state and error state for the app. I simply made two components displaying the states in text. Ideally the loading state would use something like skeleton loaders, and the error state would include informative text that depends on the API status.
+I intentionally kept loading and error states minimal, using simple text components. With more time, I would introduce skeleton loaders and more descriptive error messages based on API responses.
 
 I also did not add any true feedback for the LoanCalculator form, both that informs the user clearly of unvalidated form fields, with reasons, as well as proper states when submitting the form. Right now it mostly relies on the feedback provided by ```LoanTerms.tsx```.
 
-One detail that I downprioritized was that the input field would include number spacing every third digit (```123 456``` rather than ```123456```). I initially planned to solved this and created the util function ```addNumberSpacing.ts```. However I noticed this would require slightly more configuration to the input elements than I initially expected, so I quickly made the decision to skip this. I did however let the input fields remain as 'text' fields rather than ```type='number'```, in order to keep the component in a state that makes it easier to add in the future.
+One detail that I downprioritized was that the input field would include number spacing every third digit (```123 456``` rather than ```123456```). I initially planned to solved this and created the util function ```addNumberSpacing.ts```. However I noticed this would require slightly more configuration to the input elements than I initially expected, so I made the decision to skip this for now. I did however let the input fields remain as 'text' fields rather than ```type='number'```, in order to keep the component in a state that makes it easier to add in the future.
 
 ### AI usage
 
-Apart from using AI as a spring board throughout the development, I did generate a few things using AI:
+AI was used as a support tool during development, primarily for:
+- Generating small, single-purpose utilities and type definitions
+- Assisting with regular expressions and typings
+- General springboard for ideas and solutions
 
+The following files contain AI-generated code:
 - ```src/components/response.d.ts```: AI generated types
 - ```src/hooks/useApiQuery.ts```: AI generated types
 - ```src/hooks/useCalculateLoan.ts```: AI generated types
 - ```src/utils/addNumberSpacing.ts```: function generated by AI, mainly for the regexp.
 
-Overall, my philosophy for fully AI generated code is to keep it small and single purpose.
-
-
+My general approach with AI-generated code is to keep it small and single purpose.
