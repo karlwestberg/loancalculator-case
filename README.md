@@ -1,3 +1,25 @@
+# Loan calculator case
+
+React app build /w
+
+- vite
+-- Builds fast with easy config, creating a great dev experience. Has good plugin and library support (including 'vitest')
+-- The app was initially created using `npm create vite` to reduce time spent on product setup.
+
+- tailwindcss
+-- Gives access to more or less everything css, without the need for css files. Speeds up styling and easy to setup with vite.
+
+- @tanstack/react-query
+-- Simplifies fetching and state management. Removes the need to write complicated custom fetching hooks with error handling and state management.
+
+- react-hook-form
+-- Removes the need to manage form state and makes form validation easy.
+
+- vitest (+ @testing-library)
+-- Implements well with vite, making it easy to test react components using '@testing-library/react' 
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

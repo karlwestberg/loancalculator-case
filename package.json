@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run generate:types && tsc -b && vite build",
+    "build": "npm run generate && tsc -b && vite build",
     "generate:types": "npx openapi-typescript https://loancalculator-ivory.vercel.app/api/openapi.yaml -o ./src/types/api.d.ts",
+    "generate:icons": "rm -rf src/components/icons && npx @svgr/cli --out-dir src/components/icons -- src/assets/icons",
+    "generate": "npm run generate:types && npm run generate:icons",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest"
@@ -28,6 +30,10 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@svgr/cli": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0",
+    "@svgr/plugin-prettier": "^8.1.0",
+    "@svgr/plugin-svgo": "^8.1.0",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",

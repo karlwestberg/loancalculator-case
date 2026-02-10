@@ -2,6 +2,7 @@
 import { useId } from 'react';
 import InputFieldContainer from '~/components/InputFieldContainer';
 import cx from '~/utils/cx';
+import ChevronDown from './icons/ChevronDown';
 
 type SelectProps = React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> & {
     label?: string,
@@ -31,9 +32,9 @@ export default function Select ({ label, placeholder, className, style, children
                 )}
                 { children }
             </select>
-            <span className='absolute right-2 pointer-events-none'>
-                ▼
-            </span>
+            <div className='absolute right-1 h-10/12 aspect-square pointer-events-none bg-current/10 flex items-center justify-center rounded-sm'>
+                <ChevronDown className='h-4 w-4' />
+            </div>
         </InputFieldContainer>
     )
 }

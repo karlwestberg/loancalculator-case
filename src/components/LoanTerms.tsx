@@ -14,7 +14,7 @@ export default function LoanTerms(props:LoanTermsProps) {
     const isNotApproved = props.result?.approval?.status === 'not_approved'
     const isIdle = !isApproved && !isNotApproved
 
-    const dataItem = (text:string, value:number|undefined, unit:string) => {
+    const infoItem = (text:string, value:number|undefined, unit:string) => {
         if (value === undefined) return null
         return (
             <div>{`${text}: `}<strong>{addNumberSpacing(Math.round(value))}{` ${unit}`}</strong></div>
@@ -47,9 +47,9 @@ export default function LoanTerms(props:LoanTermsProps) {
                         <div>Calculate your personalized loan terms</div>
                     ) : isApproved ? (
                         <>
-                            { dataItem('Interest rate', props.result?.loanDetails?.annualInterestRate, '%')}
-                            { dataItem('Total interest cost', props.result?.loanDetails?.totalInterest, 'kr')}
-                            { dataItem('Total repayment amount', props.result?.loanDetails?.totalPayment, 'kr')}
+                            { infoItem('Interest rate', props.result?.loanDetails?.annualInterestRate, '%')}
+                            { infoItem('Total interest cost', props.result?.loanDetails?.totalInterest, 'kr')}
+                            { infoItem('Total repayment amount', props.result?.loanDetails?.totalPayment, 'kr')}
                         </>
                     ) : (
                         <>
