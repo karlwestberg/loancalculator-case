@@ -2,7 +2,7 @@
 
 React app build /w
 
-- vite
+- [vite](https://vite.dev/)
 Builds fast with easy config, creating a great dev experience. Has good plugin and library support (including 'vitest')
 The app was initially created using `npm create vite` for fast setup with minimal config.
 
@@ -38,17 +38,20 @@ npm run dev
 4. Open http://localhost:5173 in your browser
 
 ## Project structure
+And some components worth highlighting
 
 ```md
 src/
 - components/              # React components.
   - LoanCalculator.tsx     # Master component for the loan calculator form.
+  - LoanTerms.tsx          # Displays loan terms including, approved, non-approved, default states.
   ...
 - hooks/                   # React hooks.
   - useApiQuery.ts         # Handles react-query GET requests with the API.
   - useCalculateLoan.tsx   # Handles calculate loan POST request.
 - utils/                   # Helper functions
-- config/env               # Handles env variables
+- config/
+  - env.ts               # Handles env variables
 - tests/components         # Tests for react components
 - types/                   # Reusable type declarations, contains the generated openapi types from the API (`https://loancalculator-ivory.vercel.app/api/openapi.yaml`).
 - assets/icons             # All icons used as svg files.
@@ -57,81 +60,14 @@ src/
 - main.tsx                 # Renders react to HTML
 ```
 
+## Approach and choices
+
+Probably the first consideration was what type of react app I should build this as. Should I use a framework and what package manager should I use? The choice I ultimately made was to build the app as a static ```vite``` app using ```npm```. ```vite``` was used for it's build speed and generally good dev experience, with minial config and good library support. ```npm``` was to remove fuzz and there were no good reasons to use ```yarn``` or ```bun``` for example.
+
+The main technical priority from the get go was to create a form that handles form validation safely with some type safety. This is where ```react-hook-form``` comes in since it solves most of these issues out of the box.
+
+Another choice was how to handle data fetching. To ensure a simple approach that would handle states and errors well with minimal overhead, I opted for ```@tanstack/react-query```. This works especially well with the generated types form the api (using ```openapi-typescript```), and were easy to implement.
 
 
 
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
