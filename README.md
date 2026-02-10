@@ -28,8 +28,9 @@ npm install
 
 2. Build app
 ```
-> Note: `npm run build` must be run at least once before starting the dev server,
+Note: `npm run build` must be run at least once before starting the dev server,
 as it generates API types (via `openapi-typescript`) and icon components.
+
 npm run build
 ```
 
